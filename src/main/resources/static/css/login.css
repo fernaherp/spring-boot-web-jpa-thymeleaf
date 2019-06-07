@@ -1,0 +1,21 @@
+body, html {
+  height: 100%;
+}
+
+body {
+	background: #0B2343;
+}
+.container {
+    background: #004990;
+}
+
+.col-md-auto {
+	background-color: #ffffff;
+	padding: 50px;
+	border-radius: 25px;
+}
+
+#forgotPwd {
+	font-size: 11px;
+	padding-top: 15px;
+}

@@ -1,0 +1,2 @@
+insert into airline (id, name, status, createdate, updatedate) values (1, 'Aeromexico', 1, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP());
+insert into airline (id, name, status, createdate, updatedate) values (2, 'Connect', 1, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP());

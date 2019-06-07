@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html th:replace="~{layout :: layout(~{::title}, ~{::section}, ~{::#jsextralibs})}" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title th:text="#{airline.list.tittle}">Leave - Airlines</title>
+</head>
+
+<body>
+    <section>
+        <div class="container">
+            <h1 th:text="#{airline.list.h1}">Airlines</h1>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col" th:text="#{airline.list.table.name}">Name</th>
+                        <th scope="col" th:text="#{airline.list.table.status}">Status</th>
+                        <th scope="col" th:text="#{airline.list.table.createdate}">Create Date</th>
+                        <th scope="col" th:text="#{airline.list.table.updatedate}">Update Date</th>
+                        <th scope="col" th:text="#{airline.list.table.edit}">Edit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="airline,iterStat : ${airlines}">
+                        <td th:text="${airline.name}">Aeromexico</td>
+                        <td th:text="${airline.status}">Active</td>
+                        <td th:text="${{airline.createdate}}">05/05/2019</td>
+                        <td th:text="${{airline.updatedate}}">10/05/2019</td>
+                        <td><a href="#" data-toggle="modal" data-target="#editAirline" th:attr="data-id=${airline.id},data-name=${airline.name},data-status=${airline.status}" th:href="@{${'/airline/' + iterStat.index}}" th:text="#{airline.list.table.edit}">Edit</a></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div id="buttonSet">
+                <button class="btn btn btn-primary" data-toggle="modal" data-target="#exampleModal" th:text="#{airline.list.table.add}">Agregar</button>
+            </div>
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel" th:text="#{airline.list.modal.add.tittle}">New airline</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="#" method="post" th:action="@{/airline/add}">
+                                <div class="form-group">
+                                    <label for="airline-name" class="col-form-label" th:text="#{airline.list.modal.add.name}">Name</label>
+                                    <input type="text" class="form-control" id="airline-name" name="airline-name">
+                                </div>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{airline.list.modal.cancel}">Close</button>
+                                <button type="submit" class="btn btn-primary" th:text="#{airline.list.modal.save}">Save</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="editAirline" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel" th:text="#{airline.list.modal.edit.tittle}">Edit airline</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="#" method="post" th:action="@{/airline/edit}">
+                                <div class="form-group">
+                                    <label for="airline-name" class="col-form-label" th:text="#{airline.list.table.name}">Name:</label>
+                                    <input type="text" class="form-control" id="airline-name" name="airline-name">
+                                    <label for="inputState" class="col-form-label" th:text="#{airline.list.table.status}">Status</label>
+								    <select id="airline-status" name="airline-status" class="form-control">
+								      <option id="optionActive" value="true">Active</option>
+								      <option id="optionInactive" value="false">Inactive</option>
+								    </select>
+								    <input id="airline-id" name="airline-id" type="hidden">
+                                </div>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{airline.list.modal.cancel}">Close</button>
+                            	<button type="submit" class="btn btn-primary" th:text="#{airline.list.modal.save}">Save</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="deleteAirline" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Delete airline</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="form-group">
+                                    <label for="airline-name" class="col-form-label">Name:</label>
+                                    <input type="text" class="form-control" id="airline-name">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div id="jsextralibs">
+    	<script type="text/javascript" th:src="@{/js/airline/airline.js}"></script>
+    </div>
+</body>
+
+</html>
